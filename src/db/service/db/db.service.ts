@@ -10,11 +10,19 @@ export class DbService {
     this.pool.query('SET search_path TO bookstore');
   }
 
+  // executeQuery(queryText: string, values: any[] = []): Promise<any[]> {
+  //   this.logger.debug(`Executing query: ${queryText} (${values})`);
+  //   return this.pool.query(queryText, values).then((result: QueryResult) => {
+  //     this.logger.debug(`Executed query, result size ${result.rows.length}`);
+  //     return { ...result.rows, messages: [] };
+  //   });
+  // }
+
   executeQuery(queryText: string, values: any[] = []): Promise<any[]> {
     this.logger.debug(`Executing query: ${queryText} (${values})`);
-    return this.pool.query(queryText, values).then((result: QueryResult) => {
-      this.logger.debug(`Executed query, result size ${result.rows.length}`);
-      return { ...result.rows, messages: [] };
+    return this.pool.query('SET search_path TO bookstore;' + queryText, values).then((result: QueryResult) => {
+      this.logger.debug(`Executed query, result size ${result[1].rows.length}`);
+      return [ ...result[1].rows ];
     });
   }
 }
