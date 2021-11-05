@@ -3,11 +3,10 @@ import { BookService } from '../services/book.service';
 
 @Controller('book')
 export class BookController {
+  constructor(private bookService: BookService) {}
 
-  constructor(private bookService:BookService){}
-
-  @Get('sample')
-  ff() {
-    return this.bookService.getSample()
+  @Get()
+  function() {
+    return this.bookService.getBooks();
   }
 }

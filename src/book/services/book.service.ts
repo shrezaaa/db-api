@@ -7,7 +7,7 @@ import { DbService } from 'src/db/service/db/db.service';
 export class BookService {
   constructor(private dbService: DbService) {}
 
-  async getSample() {
+  async getBooks() {
     const res = await this.dbService.executeQuery('select * from book');
     return res;
   }
