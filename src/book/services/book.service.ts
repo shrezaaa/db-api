@@ -11,7 +11,6 @@ export class BookService {
   async getBooks(model: BookDto) {
     let query: string = 'select * from book ';
     if (model.stockID) {
-      console.log(model.stockID);
       query =
         query +
         `inner join book_stock_room on book.book_id = book_stock_room.book_id
